@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="mcjk-mc-stats:jar">
+    <output-path>$PROJECT_DIR$/../../projekty/mc-1p1t/plugins</output-path>
+    <root id="archive" name="mcjk-mc-stats.jar">
+      <element id="module-output" name="mcjk-mc-stats" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/spigot-api-1.20.2-R0.1-20231025.075948-48-shaded.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
