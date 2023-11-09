@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Database {
 
-    private McStats plugin;
+    private final McStats plugin;
     private Connection connection;
 
     public Database(McStats plugin) {
@@ -26,16 +26,11 @@ public class Database {
         String user = config.getString("mysql-user");
         String password = config.getString("mysql-pass");
 
-        this.plugin.getLogger().info(url);
-
         try {
             connection = DriverManager.getConnection(url, user, password);
 
-            this.plugin.getLogger().info("Połączono z bazą danych.");
-
             return this.connection;
         } catch (SQLException e) {
-            this.plugin.getLogger().info("Połączenie z bazą danych nie powiodło się.");
             this.plugin.getLogger().info(Arrays.toString(e.getStackTrace()));
             throw e;
         }
@@ -49,9 +44,10 @@ public class Database {
     }
 
     public PlayerStats findPlayerStatsByUUID(String uuid) throws SQLException {
-        Statement statement = getConnection().createStatement();
-        String query = "SELECT * FROM player_stats WHERE uuid = '" + uuid + "'";
-        ResultSet results = statement.executeQuery(query);
+        PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM player_stats WHERE uuid = ?");
+        statement.setString(1, uuid);
+
+        ResultSet results = statement.executeQuery();
 
         if (results.next()) {
             String displayName = results.getString("display_name");

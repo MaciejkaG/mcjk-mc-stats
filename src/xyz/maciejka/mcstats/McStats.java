@@ -10,7 +10,6 @@ public class McStats extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("MaciejkaStats się uruchamia");
         saveDefaultConfig();
 
         try {
@@ -25,11 +24,6 @@ public class McStats extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new Listeners(this), this);
         getLogger().info("Załadowano MaciejkaStats");
-    }
-
-    @Override
-    public void onDisable() {
-        getLogger().info("Wyłączanie MaciejkaAuth");
     }
 
     public Database getDatabase() {
