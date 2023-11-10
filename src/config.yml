@@ -1,5 +1,8 @@
+# Konfiguracja MySQL
 mysql-host: "localhost"
 mysql-port: "3306"
 mysql-user: "root"
 mysql-pass: ""
 mysql-dbname: "mcjk_mc_stats"
+
+web-stats-root: "https://maciejka.xyz/mc-1p1t/stats/"

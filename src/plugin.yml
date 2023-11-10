@@ -4,3 +4,10 @@ version: 0.3
 author: Maciejka
 api-version: 1.20
 description: Plugin służący do zapisywania statystyk graczy w bazie danych MySQL
+commands:
+  msstats:
+    description: Wysyła link do strony internetowej ze statystykami gracza
+    usage: /<command>
+  msleaderboard:
+    description: Wysyła link do rankingu graczy serwera
+    usage: /<command>

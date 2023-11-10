@@ -3,6 +3,7 @@ package xyz.maciejka.mcstats;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class McStats extends JavaPlugin {
 
@@ -23,6 +24,8 @@ public class McStats extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new Listeners(this), this);
+        Objects.requireNonNull(getCommand("msstats")).setExecutor(new MyStatsCommand(this));
+        Objects.requireNonNull(getCommand("msleaderboard")).setExecutor(new LeaderboardCommand(this));
         getLogger().info("Załadowano MaciejkaStats");
     }
 
