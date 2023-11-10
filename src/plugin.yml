@@ -1,6 +1,6 @@
 main: xyz.maciejka.mcstats.McStats
 name: MaciejkaMcStats
-version: 0.3
+version: 1
 author: Maciejka
 api-version: 1.20
 description: Plugin służący do zapisywania statystyk graczy w bazie danych MySQL
