@@ -5,4 +5,4 @@ mysql-user: "root"
 mysql-pass: ""
 mysql-dbname: "mcjk_mc_stats"
 
-web-stats-root: "https://maciejka.xyz/mc-1p1t/stats/" # Podstawa adresu URL wysyłanego do graczy gdy np. poproszą o ranking graczy lub własne statystyki
+web-stats-root: "https://example.com/my-mc-stats/" # Podstawa adresu URL wysyłanego do graczy gdy np. poproszą o ranking graczy lub własne statystyki, musi się kończyć slashem
