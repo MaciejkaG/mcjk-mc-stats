@@ -1,5 +1,6 @@
 package xyz.maciejka.mcstats;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import xyz.maciejka.mcstats.models.PlayerStats;
 
@@ -31,7 +32,7 @@ public class Database {
 
             return this.connection;
         } catch (SQLException e) {
-            this.plugin.getLogger().info(Arrays.toString(e.getStackTrace()));
+            this.plugin.getLogger().info(ChatColor.RED+Arrays.toString(e.getStackTrace()));
             throw e;
         }
     }
