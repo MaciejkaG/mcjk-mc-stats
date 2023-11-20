@@ -24,8 +24,9 @@ public class ReloadCommand implements CommandExecutor {
     @EventHandler
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         plugin.reloadConfig();
-        sender.sendMessage(ChatColor.GREEN+"Pomyślnie przeładowano konfigurację pluginu!");
-        sender.sendMessage(ChatColor.YELLOW+"UWAGA: Przeładowanie konfiguracji nie wpłynie na połączenie z baza danych, aby wprowadzić zmiany konfiguracji MySQL w życie, musisz zrestartować serwer.");
+        String msgContent = plugin.getConfig().getString("msreload-response");
+        sender.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+msgContent);
+        sender.sendMessage(ChatColor.YELLOW+"UWAGA: Przeładowanie konfiguracji nie wpłynie na połączenie z bazą danych, aby wprowadzić zmiany konfiguracji MySQL w życie, musisz zrestartować serwer.");
         return true;
     }
 }

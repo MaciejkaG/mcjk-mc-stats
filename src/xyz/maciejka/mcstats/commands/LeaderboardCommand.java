@@ -26,8 +26,8 @@ public class LeaderboardCommand implements CommandExecutor {
         if (sender instanceof Player p) {
             FileConfiguration config = this.plugin.getConfig();
 
-            p.sendMessage("Ranking graczy serwera jest dostępny z poziomu przeglądarki");
-            TextComponent message = new TextComponent("Kliknij tutaj by wyświetlić ranking w przeglądarce.");
+            p.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+config.getString("msleaderboard-response.first-line"));
+            TextComponent message = new TextComponent(config.getString("msleaderboard-response.link-line"));
             message.setColor(ChatColor.BLUE);
             message.setUnderlined(true);
             message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, config.getString("web-stats-root")+"leaderboard.php"));

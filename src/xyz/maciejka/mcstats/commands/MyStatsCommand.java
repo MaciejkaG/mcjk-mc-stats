@@ -26,8 +26,8 @@ public class MyStatsCommand implements CommandExecutor {
         if (sender instanceof Player p) {
             FileConfiguration config = this.plugin.getConfig();
 
-            p.sendMessage("Statystyki graczy są dostępny z poziomu przeglądarki");
-            TextComponent message = new TextComponent("Kliknij tutaj by wyświetlić swoje statystyki w przeglądarce.");
+            p.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+config.getString("msstats-response.first-line"));
+            TextComponent message = new TextComponent(config.getString("msstats-response.link-line"));
             message.setColor(ChatColor.BLUE);
             message.setUnderlined(true);
             message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, config.getString("web-stats-root")+"player.php?name="+URLEncoder.encode(p.getDisplayName(), StandardCharsets.UTF_8)));

@@ -18,9 +18,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import xyz.maciejka.mcstats.models.PlayerStats;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class Listeners implements Listener {
 
@@ -66,6 +65,14 @@ public class Listeners implements Listener {
             PlayerStats stats = getPlayerStatsFromDatabase(killer);
             stats.setMob_kills(stats.getMob_kills()+1);
 
+            FileConfiguration config = this.plugin.getConfig();
+            int milestone = config.getInt("mobkills-milestone");
+            int stat = stats.getMob_kills();
+
+            if (milestone!=0 && stats.getMob_kills()%milestone==0) {
+                killer.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+ Objects.requireNonNull(config.getString("mobkills-milestone-message")).replace("%player%", killer.getDisplayName()).replace("%stat%", Integer.toString(stat)));
+            }
+
             this.plugin.getDatabase().updatePlayerStats(stats);
         }
 
@@ -81,6 +88,14 @@ public class Listeners implements Listener {
 
             victimStats.setDeaths(victimStats.getDeaths()+1);
 
+            FileConfiguration config = this.plugin.getConfig();
+            int milestone = config.getInt("deaths-milestone");
+            int stat = victimStats.getDeaths();
+
+            if (milestone!=0 && victimStats.getDeaths()%milestone==0) {
+                victim.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+ Objects.requireNonNull(config.getString("deaths-milestone-message")).replace("%player%", victim.getDisplayName()).replace("%stat%", Integer.toString(stat)));
+            }
+
             this.plugin.getDatabase().updatePlayerStats(victimStats);
 
             return;
@@ -91,6 +106,20 @@ public class Listeners implements Listener {
 
         killerStats.setKills(killerStats.getKills()+1);
         victimStats.setDeaths(victimStats.getDeaths()+1);
+
+        FileConfiguration config = this.plugin.getConfig();
+        int dMilestone = config.getInt("deaths-milestone");
+        int kMilestone = config.getInt("kills-milestone");
+        int vStat = victimStats.getDeaths();
+        int kStat = killerStats.getKills();
+
+        if (dMilestone!=0 && vStat%dMilestone==0) {
+            victim.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+ Objects.requireNonNull(config.getString("deaths-milestone-message")).replace("%player%", victim.getDisplayName()).replace("%stat%", Integer.toString(kStat)));
+        }
+
+        if (kMilestone!=0 && kStat%kMilestone==0) {
+            killer.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+ Objects.requireNonNull(config.getString("kills-milestone-message")).replace("%player%", killer.getDisplayName()).replace("%stat%", Integer.toString(vStat)));
+        }
 
         this.plugin.getDatabase().updatePlayerStats(killerStats);
         this.plugin.getDatabase().updatePlayerStats(victimStats);
@@ -103,6 +132,14 @@ public class Listeners implements Listener {
         PlayerStats stats = getPlayerStatsFromDatabase(p);
         stats.setBlocks_placed(stats.getBlocks_placed()+1);
 
+        FileConfiguration config = this.plugin.getConfig();
+        int milestone = config.getInt("blocksplaced-milestone");
+        int stat = stats.getBlocks_placed();
+
+        if (milestone!=0 && stat%milestone==0) {
+            p.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+ Objects.requireNonNull(config.getString("blocksplaced-milestone-message")).replace("%player%", p.getDisplayName()).replace("%stat%", Integer.toString(stat)));
+        }
+
         this.plugin.getDatabase().updatePlayerStats(stats);
     }
 
@@ -112,6 +149,14 @@ public class Listeners implements Listener {
 
         PlayerStats stats = getPlayerStatsFromDatabase(p);
         stats.setBlocks_broken(stats.getBlocks_broken()+1);
+
+        FileConfiguration config = this.plugin.getConfig();
+        int milestone = config.getInt("blocksbroken-milestone");
+        int stat = stats.getBlocks_broken();
+
+        if (milestone!=0 && stat%milestone==0) {
+            p.sendMessage(ChatColor.AQUA+"[MaciejkaStats] "+ChatColor.RESET+ Objects.requireNonNull(config.getString("blocksbroken-milestone-message")).replace("%player%", p.getDisplayName()).replace("%stat%", Integer.toString(stat)));
+        }
 
         this.plugin.getDatabase().updatePlayerStats(stats);
     }

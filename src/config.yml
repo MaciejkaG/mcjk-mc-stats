@@ -1,8 +1,43 @@
-# Konfiguracja MySQL (Zmień to na poprawne dane aby plugin działał)
+# |----------| Konfiguracja MySQL |----------|
+
+# (Zmień to na poprawne dane, aby plugin jakkolwiek działał).
 mysql-host: "localhost"
 mysql-port: "3306"
 mysql-user: "root"
 mysql-pass: ""
 mysql-dbname: "mcjk_mc_stats"
 
-web-stats-root: "https://example.com/my-mc-stats/" # Podstawa adresu URL wysyłanego do graczy gdy np. poproszą o ranking graczy lub własne statystyki, musi się kończyć slashem
+# |----------| Konfiguracja komend |----------|
+
+#/msreload
+msreload-response: "Pomyślnie przeładowano konfigurację pluginu!"
+
+# /msstats
+msstats-reponse:
+  first-line: "Statystyki graczy są dostępne z poziomu przeglądarki"
+  link-line: "Kliknij tutaj by wyświetlić swoje statystyki w przeglądarce."
+
+# /msleaderboard
+msleaderboard-response:
+  first-line: "Ranking graczy serwera jest dostępny z poziomu przeglądarki"
+  link-line: "Kliknij tutaj by wyświetlić ranking w przeglądarce."
+
+# |----------| Konfiguracja milestonów (kamieni milowych). |----------|
+
+# Co którą liczbę danego osiągnięcia gracz powinien otrzymywać powiadomienie na czacie?
+# Podaj 0, aby całkowicie wyłączyć powiadamianie.
+# W wiadomości %player% to nick gracza, podczas gdy %stat% to aktualna statystyka
+deaths-milestone: 10
+deaths-milestone-message: "Gratulacje, %player%! Osiągnąłeś właśnie kamień milowy w śmierciach (%stat%)"
+kills-milestone: 15
+kills-milestone-message: "Gratulacje, %player%! Osiągnąłeś właśnie kamień milowy w killach na innych graczach (%stat%)"
+mobkills-milestone: 50
+mobkills-milestone-message: "Gratulacje, %player%! Osiągnąłeś właśnie kamień milowy w liczbie zabitych mobów (%stat%)"
+blocksplaced-milestone: 500
+blocksplaced-milestone-message: "Gratulacje, %player%! Osiągnąłeś właśnie kamień milowy w liczbie postawionych bloków (%stat%)"
+blocksbroken-milestone: 500
+blocksbroken-milestone-message: "Gratulacje, %player%! Osiągnąłeś właśnie kamień milowy w liczbie zniszczonych bloków (%stat%)"
+
+# |----------| Konfiguracja zewnętrznego panelu statystyk |----------|
+
+web-stats-root: "https://example.com/my-mc-stats/" # Podstawa adresu URL wysyłanego do graczy, gdy np. poproszą o ranking graczy lub własne statystyki, musi się kończyć slashem.
