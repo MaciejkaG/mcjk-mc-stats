@@ -9,7 +9,7 @@ mysql-dbname: "mcjk_mc_stats"
 
 # |----------| Konfiguracja komend |----------|
 
-#/msreload
+# /msreload
 msreload-response: "Pomyślnie przeładowano konfigurację pluginu!"
 
 # /msstats
