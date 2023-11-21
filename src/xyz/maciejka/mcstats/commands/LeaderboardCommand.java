@@ -11,9 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import xyz.maciejka.mcstats.McStats;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 public class LeaderboardCommand implements CommandExecutor {
     private final McStats plugin;
 

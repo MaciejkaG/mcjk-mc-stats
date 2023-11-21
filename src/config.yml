@@ -12,6 +12,9 @@ mysql-dbname: "mcjk_mc_stats"
 # /msreload
 msreload-response: "Pomyślnie przeładowano konfigurację pluginu!"
 
+# /msdbreload
+msdbreload-response: "Pomyślnie zresetowano połączenie z bazą danych!"
+
 # /msstats
 msstats-response:
   first-line: "Statystyki graczy są dostępne z poziomu przeglądarki"

@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import xyz.maciejka.mcstats.commands.LeaderboardCommand;
 import xyz.maciejka.mcstats.commands.MyStatsCommand;
 import xyz.maciejka.mcstats.commands.ReloadCommand;
+import xyz.maciejka.mcstats.commands.ReloadDbCommand;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -16,7 +17,6 @@ public class McStats extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         File configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
             saveDefaultConfig();
@@ -31,10 +31,12 @@ public class McStats extends JavaPlugin {
                 getServer().getConsoleSender().sendMessage("["+getName()+"]"+ChatColor.GREEN+" Połączenie z bazą danych pomyślne.");
             } catch (SQLException e) {
                 getServer().getConsoleSender().sendMessage("["+getName()+"]"+ChatColor.RED+" Połączenie z bazą danych nieudane.");
-                throw new RuntimeException(e);
+                this.database.isAvailable = false;
+                getLogger().severe(String.valueOf(e));
             }
 
             getServer().getPluginManager().registerEvents(new Listeners(this), this);
+            Objects.requireNonNull(getCommand("msreloaddb")).setExecutor(new ReloadDbCommand(this));
             Objects.requireNonNull(getCommand("msstats")).setExecutor(new MyStatsCommand(this));
             Objects.requireNonNull(getCommand("msleaderboard")).setExecutor(new LeaderboardCommand(this));
             Objects.requireNonNull(getCommand("msreloadconfig")).setExecutor(new ReloadCommand(this));

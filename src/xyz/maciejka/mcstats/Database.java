@@ -11,6 +11,7 @@ public class Database {
 
     private final McStats plugin;
     private Connection connection;
+    public boolean isAvailable;
 
     public Database(McStats plugin) {
         this.plugin = plugin;
@@ -30,10 +31,21 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, user, password);
 
+            this.isAvailable = true;
             return this.connection;
         } catch (SQLException e) {
-            this.plugin.getLogger().info(ChatColor.RED+Arrays.toString(e.getStackTrace()));
+            this.isAvailable = false;
             throw e;
+        }
+    }
+
+    public void resetConnection() throws SQLException {
+        if (connection!=null) {
+            this.connection.close();
+            this.connection = null;
+
+            this.initialiseDatabase();
+            this.isAvailable = true;
         }
     }
 

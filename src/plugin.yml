@@ -1,6 +1,6 @@
 main: xyz.maciejka.mcstats.McStats
 name: MaciejkaStats
-version: 1.1
+version: 1.1.1
 author: Maciejka
 api-version: 1.20
 description: Plugin służący do zapisywania statystyk graczy w bazie danych MySQL
@@ -15,4 +15,9 @@ commands:
     description: Przeładowuje plik konfiguracyjny MaciejkaStats
     usage: /<command>
     permission: maciejkastats.reloadconfig
+    permission-message: Nie posiadasz uprawnień wymaganych do użycia tej komendy!
+  msreloaddb:
+    description: Resetuje połączenie z bazą danych
+    usage: /<command>
+    permission: maciejkastats.reloaddatabase
     permission-message: Nie posiadasz uprawnień wymaganych do użycia tej komendy!

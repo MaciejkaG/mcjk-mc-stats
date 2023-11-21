@@ -29,6 +29,10 @@ public class Listeners implements Listener {
         this.plugin = plugin;
     }
 
+    private boolean isDatabaseUnavailable() throws SQLException {
+        return !plugin.getDatabase().getConnection().isValid(5);
+    }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
@@ -46,6 +50,10 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) throws SQLException {
+        if (isDatabaseUnavailable()) {
+            return;
+        }
+
         Player p = e.getPlayer();
 
         PlayerStats stats = getPlayerStatsFromDatabase(p);
@@ -57,6 +65,9 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) throws SQLException {
+        if (isDatabaseUnavailable()) {
+            return;
+        }
 
         LivingEntity entity = event.getEntity();
         Player killer = entity.getKiller();
@@ -80,6 +91,10 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) throws SQLException {
+        if (isDatabaseUnavailable()) {
+            return;
+        }
+
         Player killer = e.getEntity().getKiller();
         Player victim = e.getEntity();
 
@@ -127,6 +142,10 @@ public class Listeners implements Listener {
 
     @EventHandler
     private void onBlockPlace(BlockPlaceEvent e) throws SQLException {
+        if (isDatabaseUnavailable()) {
+            return;
+        }
+
         Player p = e.getPlayer();
 
         PlayerStats stats = getPlayerStatsFromDatabase(p);
@@ -145,6 +164,10 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) throws SQLException {
+        if (isDatabaseUnavailable()) {
+            return;
+        }
+
         Player p = e.getPlayer();
 
         PlayerStats stats = getPlayerStatsFromDatabase(p);
